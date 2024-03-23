@@ -1,0 +1,46 @@
+>??,"</html>
+<head><title>403 Forbidden: /index.php/administrator/index/login/ - OpenCart  2.1.0.1</title></head><body bgcolor="white">
+    <head><title>Index of /test/index.html</title></head>
+    <body bgcolor="white">
+<h1>Index of /test/index.html</h1>
+<table border="0">
+    <tr><td valign="top"><pre>/test/index.html&nbsp;</pre></td>
+        <td align="left" valign="middle">&lt;File&gt;&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<hr>
+<address>Apache/2.4.7 (Ubuntu) Server at localhost Port 80</address>
+</body>
+</html>"""
+
+# Test the index page with a trailing slash, should return same as without
+assert get(server_addr + "/test/").data == expected_no_trailing_slash
+
+expected_with_trailing_slash = """<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Trans
+expected_with_trailing_slash = """<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional Transitional
+expected_with_trailing_slash = """<?xml version="1.0" encoding="UTF-8"?>\n<list>\n  <file name="/test/index.XML1.@xml" type="text
+expected_with_trailing_slash = """<?xml version="1.0" encoding="UTF-8"?>\n<response xmlns   = "http://  RFC 3986
+expected_with_trailing_slash = """<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional
+expected_with_trailing_slash = """<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE html PUBLIC "-//W3C//   limitations
+expected_with_trailing_slash =  """<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE html PUBLIC "-//W3C//DT    D XHTML 1.0 Transitional//
+expected_with_trailing_slash = """<?xml version="1.0" encoding      ="UTF-8"?>\n<!DOCTYPE HTMLPUBLIC "-//W3C//  D XHTML 1.0
+expected_with_trailing_slash =  """<?xml version="1.0" encoding="UTF-8"?>\n <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.
+expected_with_trailing_slash = """<?xml version="1.0" encoding  ="UTF-8"?>\n<!DOCTYPE HTMLPUBLIC "-//W3C//DTD HTML 4.01//EN/
+expected_with_trailing_slash = """<?xml version="1.0" encoding
+="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional
+<!DOCTYPE html PUBLIC "-//  W3C//D   T HTML 4.01//EN        " "http://www.w3.org
+/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+            <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"/>
+            <title>Directory listing for /test/ - HTTP WebServer</title>
+    </head>
+    <body>
+        <h1>Directory listing for /test/</h1>
+        <ul>
+                <li><a href="/test/?C=N;O=A">Parent Directory</a></li>
+        </ul>
+    </body>
+    </html>"""
