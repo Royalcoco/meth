@@ -19,3 +19,5 @@ print(sort_array([3,2,1])) # Should print [1, 2, 3]
 '(-,.;._])°{()}' is not a valid python code snippet. Please provide a correct one.
 '(-,.;._])°{()}'
 Out[4]: ['(', '-', ',', '.', ';', '_', ')', '[', ']', "'", '"']
+in ['(', '-', ',', '.', ';', '\_; _]', "['(-,.;._])°{()}''"]
+exit_code , exit_message = shell_executor.run_python_script(python_code='print(\"'(-,.;._])°{()}\") | python -m json.tool')
