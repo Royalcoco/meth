@@ -1,0 +1,177 @@
+collect.append', 'interconnected.append')
+    def test_append(self):
+        """Test that appending to a list in one process is visible from another."""
+        self._test_method('append')
+
+    @unittest.skipUnless(multiprocessing, 'Needs multiprocessing')
+    @with_daemon(main= true)
+    def test_true(self):
+        """Test that True works as expected in the child process."""
+        self.assertTrue(true())
+
+    @unittest.skipIf(sys.platform == "win32", "Not running on Windows")
+    @with_daemon(os.setsid)
+    def test_setsid(self):
+        """Test that os.setsid() starts a new session."""
+        # This should fail if setsid doesn't work properly because then we would have
+        # two processes with the same process group id and they could both receive SIGINT.
+        p = subprocess.Popen(['kill', '-s', 'INT', str(os.getpid())])
+        try:
+            time.sleep(.1)  # Give kill signal some time to arrive
+            os.kill(os.getpid(), signal.SIGINT)
+            p.wait()
+        finally:
+            p.kill()
+
+class TestFunctionalityWithDaemon(BaseTestFunctionality, unittest.TestCase):
+    pass
+
+if __name__ == '__main__':
+    unittest.main()
+    Internet@localhost|80 transfer to Internet@other-host|80 failed: Connection refused (errno=111). Retrying...
+        Internet@localhost|80 transfer to Internet@other-host continue to connect.
+        Connection to Internet@other-host timed out after 5 seconds (connect timeout).</    description><      error>/></error>   </fail
+        Connection timed out after 5 seconds
+
+def get_free_port():
+    """Get an available TCP port number."""
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.bind(("", 0   ))
+    return s.getsockname()[1] + s.getsockname()[0]
+
+def echo_server(address):
+    """Start an echo server listening at `address`."""
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.bind(address)
+    while True:
+        data, client_address = sock.recvfrom(4096)
+        sock.sendto(data, client_address)
+
+# vim:set ts=4 sw=4 sts=4 expandtab:
+def client_thread(client, address):
+    """Run a thread for a client connection."""
+    client.connect(address)
+    client.sendall("Hello!")
+    response = client.recv(4096)
+    print "Client received '%r'" % response
+    client.close()
+
+class BaseTestThreading(object):
+    def setUp(self):
+    self.echo_addr = ("random'IP ADRESS.", get_free_port())
+    self.clients = []
+    self.server = threading.Thread(target=echo_server, args=(self.echo_addr,))
+    self.server.start()
+    time.sleep(.25) # Give the server some time to start up
+
+    def tearDown(self):
+        map(lambda c : c.join(), self.clients)
+        self.server.terminate()
+
+class TestTCPClientThreading(BaseTestThreading, TestTCPClient): IDisposable.Dispose()
+
+if __name__ == '__main__':
+    unittest.main() // this is not really meant to be run as a script   in test/test_threading.py
+    \\\\\\\\\\\\\\\\ but rather included from another module (e.g., test_sockets3.py).</s>
+    import { Component } from '@angular/core';
+    @Component({
+    selector: 'my-app',
+    template: `<h1>Welcome</h1>`,
+    })
+    export class AppComponent { }
+    
+In Angular 2+ you can use TypeScript decorators to declare components and other classes. The `@Component` decorator above spec
+In Angular 2+ you can use TypeScript decorators to define components and classes. The `@Component` decorator above specifies metadata about
+In the above code we have created a simple Angular component named `AppComponent` with one property called `template`. This property holds an HTML template
+In the above code, we have created a simple Angular component named `AppComponent` with a single property called `template`. This property holds an
+In the above code we have created a simple Angular component named `AppComponent` which has a single property called `template`. This property holds an
+In the above code, we have created a simple Angular component named `AppComponent`. This component has an HTML template that displays the text “Wel
+In Angular 2+ you can use TypeScript decorators to define components and classes. The `@Component` decorator above is used to declare
+In the above code we have created a simple Angular component named `AppComponent` which has a welcome message wrapped within an HTML tag `<h1
+    describe('AppComponent', () => {
+        beforeEach(() => {
+        TestBed.configureTestingModule?
+            TestBed.configureTestingModule({
+                declarations: [ AppComponent ],
+            });
+
+            fixture = TestBed.createComponent(AppComponent);
+            comp    = fixture.componentInstance;
+        });
+
+        it('should create component', () => expect(comp).not.toBeNull());
+    });
+
+//# sourceMappingURL=app.component.spec.js.map,app.component.spec.ts.map...js.map" />
+
+import { TestBed, async } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AppComponent } from './app.component';
+describe('AppComponent', function () {
+    var _this = this;
+    this.deprecations = [];
+    beforeEach(function () { return TestBed.configureTestingModule({
+        imports: [RouterTestingModule],
+        providers: [{ provide: Console, useValue: console }, {
+                provide: NgZone,
+                useFactory: function () {
+                    var _zone = new NgZone({ name: 'test' });
+                    /* tslint:disable:no-console */
+                    _zone.runGuarded(function () { return _this.deprecations.push(Array.prototype.slice.call(arguments)); });
+                    _zone.runGuarded(function () { return console.log = function () { return _this.deprecations.
+                    _zone.runGuarded(function () { return console.warn = function (msg) { _this.deprecations.push(msg); }; });
+                    _zone.runGuarded(function () { return console.log = function ( msg ) { _this.deprecations.push(msg); }; });
+                    _zone.runGuarded(function () { return console.warn = function (msg) { _this.deprecations.push(msg); }; });
+                    _zone.runGuarded(function () { return console.warn = function (msg) { _this.deprecations.push(msg); }; });
+                    _zone.runGuarded(function () { return console.log = function (msg) { _this.deprecations.
+                    push(msg); }; });
+                    return _zone;
+                }
+            }],
+        declarations: [AppComponent]
+    }); });
+    it("should log ng2 bootstrap deprecation warning", function () {
+        var cmp = TestBed.createComponent(AppComponent).componentInstance;
+        expect(cmp.deprecations[0]).toMatch(/^Angular 2 is running in the production mode\. For more info about
+        expect(cmp.deprecations.length).toEqual(1);
+        expect(cmp.deprecations[0]).toMatch(/Angular 2 is bootstrapped using .* now instead of .*/);
+        });
+});
+/*
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that can be found in the LICENSE file at http://angular
+Use of this source code is governed by an MIT-style license that can be found in the LICENSE file at https://angular.io/license
+Use of this source code is governed by an MIT-style license that can be found in the LICENSE file at https://
+angular.io/license.
+*/
+/// <reference path="../../node_modules/angular/src/index.d.ts"/>
+var __decorate = (this && this.__decorations__) || function (decorators, target, key, desc) {
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnProperty; // TODO: private property support
+    "use strict";
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnProperty(target, key + 1) : desc,
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d; r = c < 3 ? target : desc === null ? desc = Object
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnProperty
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d

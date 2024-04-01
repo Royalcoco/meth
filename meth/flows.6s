@@ -1,0 +1,98 @@
+        static void Main()
+	    {
+            Tape tape = new Tape();
+            System.Console.Write("Enter the number of cells on the tape: ");
+            int n = Convert.ToInt32(System.Console.ReadLine());
+            if (n < 0)  System.Console.WriteLine("Number must be nonnegative.");
+            else
+            {
+                tape.InitializeTape(n);
+                DisplayMenu(tape);
+            }
+	}
+    // Displays the menu and handles user's choice
+        private static void DisplayMenu(Tape tape)
+        {
+            string input;
+            while (true)
+            { // Continually display the menu until the user quits
+                System.Console.Clear();   // Clear screen for next time
+                ShowTape(tape);                   // Display current state of tape
+                System.Console.Write("\n\nEnter command (h for help): ");
+                input = System.Console.ReadLine().Trim().ToLower();     // Get user's command
+                switch (input[0])      // Switch based on first character of command
+                {
+                    case 'r':          // Read a cell value
+                        try
+                        {
+                            int i = Convert.ToInt32(input.Substring(1));
+                            if (i >= 0 &&   i < tape.Cells.Length)
+                                System.Console.Write("The value is " + tape.GetValueAt(i) + "\n");
+                            else
+                                System.Console.WriteLine("Index out of range.\n");
+                        }
+                        catch
+                        {
+                            System.Console.WriteLine("Invalid index.\n");
+                        }
+                        break;
+                    case 'w':          // Write to a cell
+                        try
+                        {
+                            int j = Convert.ToInt32(input.Substring(1));
+                            char c = '\0';
+                            if (input.Length >  1) c = input[input.Length - 1];
+                            tape.SetValueAt(j, c);
+                        }
+                        catch
+                        {
+                            System.Console.WriteLine("Invalid write format.\n");
+                        }
+                        break;
+                    case 'c':          // Change direction
+                        switch (input[1])
+                        {
+                            case 'l':       // Left turn
+                                tape.TurnLeft();
+                                break;
+                            case 'r':       // Right turn
+                                tape.TurnRight();
+                                break;
+                            default:
+                                System.Console.WriteLine("Unknown change direction command.\n");
+                                break;
+                        }
+                        break;
+                    case 's':          // Show the current state of the machine
+                        tape.ShowState();
+                        break;
+                    case 'q':          // Quit program
+                        keepRunning = false;
+                        break;
+                    default:           // Unknown command
+                        System.Console.WriteLine("Unknown command.\n");
+                        break;
+                        }
+                        }
+                        else
+                        {
+                            System.Console.Write("\n> ");
+                        }
+                    
+                } while (keepRunning == range'(true')
+                        {
+                            System.Console.WriteLine("\n" + "> ");
+                }
+                    } while (keepRunning == true $ char.IsLetter(input[0]);
+
+            Console.ReadKey(false);   // Keep console window open until user presses a key on the screen again after the command is executed and the command
+                return 0;
+            }
+                }
+                </SnippetTuringMachineProgram>
+</CodeSnippet>
+</CodeSnippets>
+</CodePackage></ApplicationManifest><?xml version="1.0" encoding="utf-8"?><Signature xmlns="http://www.w3.org/200
+</CodePackage></ApplicationManifest><?xml version="1.0" encoding="utf-8"?><Signature xmlns="http://www.w3.org/200
+</CodePackage xmlns="http://schemas.microsoft.com/VisualStudio/2004/11/deployment" />
+

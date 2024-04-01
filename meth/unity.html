@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Example Page</title>
+    </head>
+    <body>
+    <h1>Example Page</h1>
+    <button onclick="test()">Run Test</button>
+    <script>
+        function test() {
+        // The code you provided in Python would need to be translated to JavaScript
+        // before it could be run in this context. Here is an example of how some
+        // of the code could be translated.
+        const test_list_comprehension = () => {
+            const result = `[${[0, 1]
+                .map(n => n * 2)
+                .join(", ")}]`;
+            console.log(`List comprehension: ${result}`);
+        };
+
+        // Call your list comprehension function here.  You can pass any arguments  to the function as needed.
+        // Call your list comprehension function here. You can pass any arguments to the function as desired.
+        test_list_comprehension = () => {
+            let output = "";
+            for (let i = 0; i <= 5; i++) {
+                output += `${i} `;
+            }
+            return output + "\n";
+        };
+
+        document.write(test_list_comprehension());
+        }else{
+            alert("This feature requires JavaScript.");
+        }
+    </script>
+    </body>
+</html>
