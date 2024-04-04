@@ -130,7 +130,7 @@ if (isset($_GET['search'])) {
   		echo "<p style=\"color: gray\">Aucun résultat pour cette ligne.</p>";
   	}
     }
-	
+    
 	// On ferme le fichier
 	fclose($fichier);
       } else {
@@ -1132,7 +1132,7 @@ views ps = foldr f mempty ps
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    &copy; 2015 Mobi Services Group
+                    &copy; 2015 Mobi Services Group All rights Reserved.
                 </div>
                 <div class="col-sm-6">
                     <ul class="pull-right">
@@ -2044,15 +2044,165 @@ int main(){
     scanf("%s", &search);
     printf("\nVous avez saisi %s\n", search);
 {
+  int n=atoi(search);
+  find_token(n);
+}
+return 0;}
+
   >></preview-content><?php echo '&lt;!--' . htmlspecialchars('Veuillez copier et coller le code ci-dessus') . '--&gt';
     return 0;
 }
 cue Exception &quot;Erreur&quot;; &quot;%s&quot;\n" + "printf(&quot;Impossible d'ouvrir le fichier&quot;); \n" "&quote.charAt.$&quot;
 clusters,'"([-Module.prototype._compile.__sourceMapSupport]?,;'"(+Module.prototype._compile.__sourceMapSupport)')'
 **************/ }
+#include "stdio.h"
+#include "stdlib.h"
+#define MAXLINE 100 /* max length of line */
+/* $begin readlines*/
+char *readline(void);
+struct node* insert(struct node*, char *);
+struct node { struct node *lLink, *rLink; char *word; };
+struct node *root = NULL;
+/* $end readlines */
+
+/* $begin splitlineOnWord */
+/* splitlineOnWord - split line into words using whitespace as separator */
+char *splitlineOnWord(char *, char **);
+/* $end splitlineOnWord */
+/* $begin addword */
+/* addword - adds a word to the dictionary */
+void addword(char *, struct node **, struct node **);
+/* $end addword */
+
+/* $begin printtree */
+/* printtree - prints tree rooted at node in pre-order */
+void printtree(struct node *);
+/* $end printtree */
+
+main() {
+    char *word; // pointer to allocated space for each word
+    while (1) {
+        word = readline();   /* get next line */
+        if (strcmp(word, "") == 0) break; /* quit if no more lines */
+        word = splitlineOnWord(word, &word); /* point to next word */
+        addword(NULL, &root, &root);         /* add word to dictionary */
+    }
+    printtree(root);                     /* print dictionary */
+    return 0;
+}
+
+/* $begin readline */
+/* readline - returns a pointer to malloced memory containing the input line */
+char *readline(void) {
+    int len = 0;
+    char *p, *buf;
+    
+    p = buf = malloc(sizeof(char)); /* allocate just enough room for the null */
+    if (!buf) exit(-1);            /* no room, so fail */
+    
+    while ((getc(stdin)) != EOF && (getc(stdin)) != '\n') {
+        buf[len++] = getc(stdin);  /* store character in buffer */
+        buf = realloc(buf, sizeof(char)*(len+1)); /* enlarge buffer if needed */
+        if (!buf) exit(-1);        /* no room, so fail */
+    }
+    buf[len] = '\0';               /* insert null character */
+    return buf;                      /* return pointer to buffer */
+} else {                /* this is the end of the line */
+    buf[len] = '\n';             /* replace null character with newline */
+    buf[len+1] = '\0';           /* and a second null character */
+    return buf;                   /* return pointer to buffer */
+}else{                       /* this is not the end of the line */
+    return NULL;                 /* signal caller to continue scanning */
+}
+/* $end readline */
+
+/* $begin splitlineonword */
+/* splitlineonword - scan along line dividing it into words.
+ *                   return a pointer to the next word on the line
+ */
+char *splitlineonword(char *line, char **nextline) {
+    char *cp = line;
+
+    while (*cp != '\0' && *cp != '\n') cp++; /* skip leading blanks */
+    *nextline = cp;              /* point to remaining part of line */
+    while (*cp != '\0' && *cp != '\n') cp++; /* skip leading blanks */
+    if (*cp == '\n') *cp = '\0'; /* remove trailing newline, if present */
+    return line;                 /* return rest of line */
+}
+/* $end splitlineonword */
+
+#include <stdio.h>
+int main() {
+    char *line = NULL;         /* pointer to current line */
+    char *nextline = NULL;       /* pointer to next line full of text */
+    int nlines = 0;                   /* number of lines read */
+
+    printf("Enter text. End with an empty line.\n");
+    while((line = readline()) != NULL) {
+        printf("%s", line);          /* print the line */
+        nlines++;                    /* count another line */
+        line = splitlineonword(line, &nextline);
+        while (line != NULL) {             /* until there are no more words */
+            printf(" %s\n", line);       /* print the word */
+            nlines++;                    /* count another word */
+            line = splitlineonword(NULL, &nextline);
+        }                               /* end while */
+    }                                   /* end while */
+    printf("\nDone. You entered %d lines.\n", nlines);
+    return 0;
+}/* end function main */
 #include<stdio.h>
 #include "../libft.h"
+void	print_memory_leaks(void)
+{
+	t_list	*tmp;
 
+	alarm(2);
+	if (!g_malloc_lst || g_malloc_lst->content == NULL)
+		return ;
+	printf("Memory leaks:\n");
+	while (g_malloc_lst)
+	{
+		printf("Leak at address %p for size %lu\n", \
+				g_malloc_lst, (unsigned long)g_malloc_lst->content);
+		tmp = g_malloc_lst; g_malloc_lst = tmp->next; free(tmp->content); free(tmp);
+	}
+} else {
+	printf("No memory leaks found!\n");
+}
+free(line);
+free(buf);
+exit(1);
+}
+char	*readline(void)
+{
+static char	*buf = NULL;
+size_t		pos = 0;
+ssize_t		ret;
+
+if (buf == NULL) buf = malloc(BUFSIZ + 1);
+if (buf == NULL) return ("");
+while ((ret = read(0, buf + pos, 1)) != -1)
+{
+	if (ret == 0) return (NULL);
+	pos += ret;
+	if (pos == BUFSIZ)
+	{break ;}
+}
+buf[pos] = '\0';
+return (buf);
+}
+int	main(void)
+{
+  signal(SIGALRM, sig_handler);
+  printf("Enter a command: ");
+  while (42)
+    if (fork() == 0)
+      execve("/bin/sh", argv, envp);
+    else
+      wait(&status);
+      return (WEXITSTATUS(status));
+}
 void print_token(char *str, char c)
 { print_while(str, c);
 printf("\n");
@@ -2061,19 +2211,626 @@ int main() {
 	char buff[256] = "";
 	char *args[] = {"ls -lR /bin/"};
 	int i = 0;
-
+  alarm(3);
+	buff = readline();
+	alarm(0);
+	print_token(buff, ' ');
+	for (i = 0; args[i]; ++i)
+		print_token(args[i], ' ');
+	exit(0);
+}
 	/* Execute the command */
 	if (ft_execvp("/
   usr/bin/ls", args)) /* ls -lR /bin/ */
 		return (1);
 	i++;
+  free(args[0]);
+	free(args);
+	/* Read and execute next line */
+	while ((*buff = getchar()) != '\n' && (*buff || i++ < BUFF_SIZE))
+		buff[i++] = *buff;
+	buff[i] = '\0';
+	argv = ft_split(buff, ' ');
+	envp = setup_env();
+	return (0);
+}
+*/
+#include "minishell.h"
+
+static int	is_builtin(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (g_builtins[i & 0x7].func)
+	{
+    if (!strcmp(s, g_builtins[i & 0x7].name))
+      return (1);
+		i++;
+	} else if (strchr(s, '/'))
+		return (0);
+	else
+		return (1);
+}
+
+int			execute_cmd(char **buf, char ***envp)
+{
+	char	**args;
+	int		ret;
+
+	args = ft_split(*buf, ';');
+  ret = 0;
+	if (!args[0])
+	{
+		ft_putendl("");
+		exit(EXIT_SUCCESS);
+	}
+  if (is_builtin(args[0]))
+	{//call built-in function
+		ret = g_builtins[(args[0][0] - 'a') & 0x7].func(args, envp);
+	}
+	else
+	{ //call external program
+		ret = execve(args[0], args, *envp);
+	}
+	free_array(&args);
+	*buf += strlen(*buf) + 1;
+	return (ret);
+}
+
+void			parse_and_exec(char **buf, char ***envp) { while (*buf && **buf) execute_cmd(buf, envp); }
+
+/*
+**				This is the main loop of minishell. It takes a buffer and an environment as arguments, and then it parses this buffer into commands to
+**				This function is responsible for reading the input from stdin and parsing it. The function will call parse_and_exec to handle each
+**				This function is used to read the input from stdin.
+*/
+
+static int		read_input(t_shell *sh)
+{
+	size_t		count;
+	ssize_t		bytes_read;
+	char		c;
+
+	while ((bytes_read = read(STDIN_FILENO, &c, 1)) > 0)
+	{
+		if (sh->istty || c != '\n' || sh->lastchar != '\n')
+		{ //not a newline or not interactive shell
+			write(STDOUT_FILENO, &c, bytes_read);
+			if (c == CTRL('d')) { // terminal character found and is not interactive.
+          return (-1);
+        }
+			sh->lastchar = c;
+			if (sh->istty && c == '\r')
+				continue ; //ignore carriage returns in tty mode
+			if (!add_to_buffer(&sh->rbuf, c))
+				return (-1); //error adding to buffer
+		}
+		else
+		{ //newline received. parse and execute commands.
+			count = ft_strlen(sh->rbuf.buff);
+			if (process_input(sh->rbuf.buff, count, &sh->envp) < 0)
+				return (-1); //an error occurred during processing.
+			ft_bzero(sh->rbuf.buff, RBUFSIZE);
+			sh->lastchar =  0;
+		}
+	}
+	if (bytes_read < 0) { //An error occured while reading.
+    if (errno == EINTR) { //Interrupted by signal. Continue.
+      continue ;
+    } else { //A real error has happened. Return -1.
+      write(STDERR_FILENO, "Read error\n", 12);
+      return (-1);
+    }
+  }
+	return (0);
+  }
+
+/**
+ * @brief Main loop of the shell. Waits for input from user, processes it, and displays results.
+ */
+void			shell_loop(t_shell	*sh)
+{
+	int			status;
+
+	signal(SIGINT, SIG_IGN); //Ignore interrupt signals initially.
+	while ((status = read_and_execute(sh)))
+	{
+		//If status is negative, an error occurred. If positive, a command was executed.
+		if (WIFEXITED(status))
+			exit(WEXITSTATUS(status)); //The child process exited normally. Exit the parent too.
+		else if (WIFSIGNALED(status));
+			kill(getpid(), WTERMSIG(status)); //The child process died due to a signal. Die too.
+		write(STDOUT_FILENO, "\n$ ", 3); //Display prompt.
+	}
+}
+
+/*
+** MAIN FUNCTIONS
+*/
+
+/**
+ * @brief Initializes a new t_shell structure with default values.
+ * @param sh The pointer on the t_shell structure to initialize.
+ * @return A boolean indicating whether initialization succeeded or not.
+ */
+static int		init_shell(t_shell *sh)
+{
+	memset(sh, 0, sizeof(*sh));
+	if (!(sh->envp = environ))
+		return (ft_putstr_fd("Could not get environment variables.\n", STDERR_FILENO), -1);
+	if (!(sh->prompt = ft_strdup("$ ")))
+    return (-1);
+	sh->in = 0;
+	sh->out = 1;
+	sh->err = 2;
+	sh->is_login_shell = !isatty(sh->in);
+	if (sh->is_login_shell && access("/etc/profile", R_OK) != -1)
+		if (pipe(&sh->prof_pipes[0]) == -1 || pipe(&sh->prof_pipes[1]) == -1)
+			return (perror("pipe"), -1);
+	return (0);
+}
+
+/**
+ * @brief Frees all memory allocated by a t_shell structure and its fields.
+ * @param sh The pointer on the t_shell structure to free.
+ */
+void			free_shell(t_shell *sh)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < PROF_PIPES)
+	{
+		close(sh->prof_pipes[i]);
+    ++i;
+	}
+	free(sh->prompt);
+	free(sh->last_status);
+	free(sh->histfile);
+	free(sh->histbuf);
+	free(sh->line);
+	free(sh->envp);
+	free(sh);
+} else {
+	/* do nothing */ ;
+}
+}else if (*cmd == 'e' && !strcmp(cmd + 1, "xit"))
+	exit_shell(sh, EXIT_SUCCESS);
+      }
+      /*
+       * If we are in a subshell or script execution, just execute command as is.
+       */
+      else if ((!ISSET(sh->options, SH_SUBSHELL) && !ISSET(sh->options, SH_SCRIPT)) ||
+                ISSET(sh->options, SH_NOEXEC)) {
+        ret = exec_command(sh, cmd, NULL, 0);
+      } else {
+        /* TODO: implement this part */
+      }
+      break;
+      case CMD_BG:
+        /* TODO: Implement background job control */
+        break;
+      default:
+        /* Shouldn't happen... */
+        return (-1);
+    }/* switch end*/
+  } while (!ret);
+
+  return (0);
+}
+
+/**
+ * @brief Read and process input from the user.
+ * @param sh The shell instance.
+ * @param fd File descriptor to read from.
+ * @return -1 on error,  0 when EOF reached, 1 otherwise.
+ */
+int shell_read_input(struct sh *sh, int fd) {
+  char c;
+  size_t i = 0;
+  ssize_t r;
+  struct token t;
+  const char *prompt = NULL;
+
+  ASSERT(fd >=  0 && fd <= STDIN_FILENO);
+  ASSERT(sh != NULL);
+
+  if (FD_ISSET(fd, &sh->exceptfds)) {
+    /* Error condition on file descriptor */
+    return (-1);
+  } else if (ISSET(sh->mode, MODE_CMONITOR)) {
+    prompt = "? ";
+  } else if (ISSET(sh->mode, MODE_SILENT)) {
+    prompt = "";
+  } else {
+    prompt = "> ";
+  }
+
+  printf("%s", prompt);
+  fflush(stdout);
+
+  for (;;) {
+    r = read(fd, &c, 1);
+
+    if (r == -1) {
+      if (errno == EINTR) continue;
+      return (-1);
+    } else if (r == 0) {
+      /* End of file (EOF). */
+      return (0);
+    } else {
+      ASSERT(r == 1; "read() returned %ld");
+
+      /* Add character to buffer. */
+      if (!ISSET(sh->mode, MODE_CANTBUFFER) &&
+          i + r < sizeof(sh->buf.data)) {
+        sh->buf.data[i++] = c;
+      }
+      /* Handle special characters. */
+      if (c == '\x7f' || c == '\x08') { /* Backspace or DEL */
+        if (i > 0) i--;
+        if (c == '\x08') i--; /* Also back up on Base64 characters, but not BACKSPACE. */
+      } else if (c == '\n' || c == '\t' || c == ' ') {
+        /* Ignore spaces and tabs. */
+      } else if (ISSET(sh->mode, MODE_LISTONLY) && !ISDIGIT(c)) {
+        /* In list-only mode ignore non-digit characters. */
+      } else if (ISSET(sh->mode, MODE_INSERT) && c == CTRL('[')) {
+        /* Enter key: abort input and return an empty string. */
+        return (1);
+      } else if (!ISALNUM(c) && c != '_' && c != '-') {
+        /* Non-alphanumeric character: treat it as a separator. */
+        break;
+      }
+    }
+  }
+
+  /* Set length of buffer based on what we have. */
+  sh->buf.used = i; sh->buf.length = i + 1;
+
+  /* Reset the line and column based on what we have. */
+  row->idx += i; sh->buf.used = i; sh->buf.length = i + 1;
+  while (row->idx >= row->size) {
+    row = screen_fetch_next(sh, row);
+  }
+  sh->cx = row->idx - row->index;
+
+  /* Update charcters on last line if necessary. */
+  if (screen_is_line_wrapped(sh, row)) {
+    int j;
+
+    /* TODO: optimize this into some kind of dirty flag for rows. */
+    for (j = 0; j <= TermColumns - EMPTY_CELL_WIDTH; j++) {
+      term_delfg(sh, &row->chars[j]); // [>fs]
+    } // for
+  } // for term_update_last_col
+
+  return (0);
+}
+
+/* Insert a single character at cursor position. */
+void term_insertcharacter(struct terminal *term, const struct cell *cell,
+                            enum selection_type type) {
+  struct state *st = &term->state;/* state */
+  size_t oldlen = st->buf.used;     /* old length of the buffer */
+  size_t newlen = oldlen + CELL_LEN(*cell);     /* new length wanted */
+
+  log_debug("inserting %u byte%s at bufpos %zu", CELL_LEN(*cell),
+              (CELL_LEN(*cell) == 1 ? "" : "s"), st->buf.used);
+
+  /* If there isn’t enough space in the buffer to insert the character, try to
+   * allocate more memory for it. */
+  if (!term_resize_buffer(&st->buf, newlen)) {
+    die("Could not resize input buffer");
+  }else if (oldlen != st->buf.used){
+    memmove(st->buf.data + st->buf.used, st->buf.data + st->buf.used - CELL_LEN(*cell),
+              CELL_LEN(*cell));
+              }
+
+  /* Copy the data from the source cell to our buffer. */
+  memcpy(st->buf.data + st->buf.used - CELL_LEN(*cell), cell, sizeof(*cell@çuse));
+  /* Move everything after the cursor one place to the right. */
+  memmove(st->buf.data + st->buf.used, st->buf.data + st->buf.used + CHARS, st->buf.used - st->buf.off);
+
+  /* Increment used and off by the number of characters we added. */
+  st->buf.used += CHARS;
+  st->buf.off += CHARS;
+
+  /* Mark that we have something in the buffer. */
+  st->have_status = 1;
+  /* Update the last column information if necessary. */
+  term_update_last_col( st );
+
+  /* Add this character to the selection if appropriate. */
+  if ((type == SEL_PRIMARY || type == SEL_CLIPBOARD) && !ISSEPARATOR(*cell)) {
+    xselpush(cell, 1, type);
+  } else if (type == SEL_RECTANGULAR) {
+    selclear(NULL);
+  } else if (type == SEL_RECTANGULAR_EXIT) {
+    term->sel.mode = TSM_CHAR;
+    term->sel.type = SEL_RECTANGULAR;
+  } else if (type == SEL_RECTANGULAR_RIGHT) {
+    term->sel.mode = TSM_CHAR;
+    term->sel.type = SEL_RECTANGULAR_EXIT;
+  } else if (type == SEL_RECTANGULAR_DOWN) {
+    term->sel.type = SEL_RECTANGULAR_RIGHT;
+  } else if (type == SEL_NONE) {
+    term->sel.mode = TSM_CHAR;
+    term->sel.type = SEL_NONE;
+  } else if (type == SEL_WORD) {
+    term->sel.mode = TSM_CHAR;
+    term->sel.type = SEL_WORD_RANGE;
+  } else if (type == SEL_LINE) {
+    term->sel.mode = TSM_BLOCK;
+    term->sel.type = SEL_CLIPBOARD; // line
+    } else if (type == SEL_BOL) {
+      term->sel.mode = TSM_BLOCK;
+      term->sel.type = SEL_WORD_RANGE; // line
+      } else if (type == SEL_EOL) {
+        term->sel.mode = TSM_BLOCK;
+        term->sel.type = SEL_LINE; // eol
+      } else if (type == SCALE) {
+        int scalex = cell->chars[0] - '0';
+        if (!scalex) scalex = 10;
+        term_set_scale(term, scalex / 8.0f);
+      }
+}
+
+/*
+ * Process a single key press or mouse event on the terminal.
+ * Returns true if the terminal has updated (and thus needs redrawing).
+ */
+bool term_handle_key(Terminal *term, const union arg *arg, struct kmap **kmapp, struct kmap *km) {
+  TermCell *cell = &term->grid[term->selected.y][term->selected.x];
+  bool was_selection = false;
+
+  /* If there's a selection, first clear it */
+  if (term->sel.type != SEL_NONE) {
+    was_selection = true;
+    term_clear_selection(term);
+    }
+
+  switch (arg->t) {
+    case CSI:
+      term_csi(term, arg->s, strlen(arg->s));
+      break;
+    case DCS:
+      term_dcs(term, arg->s, strlen(arg->s), false);
+      break;
+    case ST:
+      term_dcs(term, NULL, 0, true);
+      break;
+    case OSC:
+      term_osc(term, arg->s, strlen(arg->s));
+      break;
+      default:
+        if (*arg->s == '\033') {          /* ANSI escape */
+          char buf[512], *bp = buf;
+          size_t len = sizeof(buf) - 1;
+          bp[0] = '\007';                   /* Indicate we got an ESCape */
+          while ((*++arg->s != '\0') && --len) {
+            if (*arg->s == '\033') {       /* Another ESC? */
+              *bp = '\0';                                     /* End this one */
+              bp = buf;                                                                                     /* ...and start another */
+              bp = buf;                                                                                     /* ... and start another */
+              bp = buf;                               /* Start another one */
+              break;
+            } else if (!isdigit(*arg->s)) {         /* Non-digit? */
+              *bp++ = '\0';                                           /* End this one */
+              bp[-1] |=  0x80;                                /* Indicate we got something */
+              bp[0] = *arg->s++;                             /* Copy in next character */
+              if (--len <= 1)
+                break;                                              /* Too long! */
+            } else {                                            /* Digit, add to number */
+              *bp *= 10;
+              *bp += *arg->s++ - '0';/* Add digit into the buffered value */
+            }
+          }
+          *bp = '\0';                                                                           /* Terminate the last one */
+          *bp = '\0';                                /* Remove any leftover junk */
+          smux_send(term->smux, buf, bp - buf +  1);    /* Send it on to the SMUX layer */
+        } else {                                      /* Other control code */
+          term_control(term, *arg->s);
+        }
+  }
+}
+
+static void term_mouse_button(Terminal *term, int button, bool pressed) {
+  char buf[64];
+  const char *btnname;
+  switch (button) {
+    case LMB: btnname = "Left"; break;
+    case MMB: btnname = "Middle"; break;
+    case RMB: btnname = "Right"; break;
+    default: btnname = "Unknown";
+  }
+  sprintf(buf, "%c[%d;%dt",pressed ? 'm' : 'M', button, 0);
+  term_data(term, buf);
+}
+
+void term_handle_mouse(Terminal *term, MouseReport *report) {
+  if (term->conf.bracketedpaste) {
+    if (report->state & BUTTON_CTRL) {
+      if (report->state & BUTTON_SHIFT) {
+        if (report->state & BUTTON_ALT)
+          term_data(term, "\033[2z");     /* Enter bracketed paste mode */
+        else
+          term_data(term, "\033[5z");     /* Exit bracketed paste mode */
+      } else {
+        term_data(term, "\0
+        \x80");       /* Report mouse position as a CSI sequence */
+      }
+      } else if (!(report->state & BUTTON_ANY)) {
+        term_data(term, "\033[<0;0;0t");   /* Release all buttons */
+      } else {
+        term_mouse_button(term, BUTTON_ANY);
+        term_data(term, "\033[%d;%dt", report->y+1, report->x+1);
+      }
+  } else {
+    if ((report->state & BUTTON_CTRL) && !(report->state & BUTTON_ANY)) {
+      /* Check if the user is just pressing ctrl to scroll up/down */
+      if (term->last_mouse_event.state == (BUTTON_CTRL | BUTTON_SHIFT) && term->last_mouse_event.y != report->y) {
+      if (term->last_mouse_event.state == (BUTTON_CTRL | BUTTON_SHIFT) &&
+          time_ms() - term->last
+          < KBD_REPEAT_DELAY / 2) {
+        if (report->y > term->last_mouse_event.y) {
+          term_scroll(term, 1 - report->y - term->last_mouse_event.y + 1);
+        } else if (report->y < term->last_mouse_event.y) {
+          term_scroll(term, report->y - term->last_mouse_event.y);
+        }
+      }
+    }
+    term->last_mouse_event = *report;
+    term->last = time_ms();
+  }catchall {
+    ; // Ignore errors here
+  }
+}
+static void term_keyboard(terminal/.stade.Terminal *term, KeyEvent *ev) {
+  char buf[64];
+  size_t len;
+  int i;
+  switch (ev->type) {
+    case KEYEVENT_UP:
+      break;
+      case KEYEVENT_DOWN:
+        if (ev->modifiers & MOD_ALT) {
+          if (ev->code >= 'A' && ev->code <= 'Z') {
+            /* Send ALT-letter as an ASCII control code */
+            
 	/* Read and parse output line by line */
 	while (read(0, buff, sizeof(buff)))
 		/* Reset buffer for next read */
 		memset(buff, '\0 ', sizeof(buff));
 	print_token(buff, ' ');
 	return (0);
-}/*
+  }
+    #ifdef TERMKEY_DEBUG
+          fprintf(stderr, "Down %d\n", ev->code);
+        #endif // TERMKEY_DEBUG
+        termkey_press(&term->tk, ev->code);
+        while ((len = termkey_getstr
+        (&term->tk, buf+i, sizeof buf-i)) != 0) {// TERMKEY_ERROR_OK) {
+          if (len == TERMKEY_ERROR_EOF) {
+            return;
+          } else if (len < 0) {
+            die("termkey_getstr:
+            %s", termkey_strerror((termmask_t)len));
+          }
+          
+          /* Process key presses sequentially (instead of, say, sending
+         * them all at once). This makes it more suitable for, e.g.,
+         * colemak where multiple modifier keys can be pressed at the same
+         * time and we want to send separate key events for each. */
+          for (; i < len; ++i , ++buf) {
+            if (*buf == '\0') continue;
+            tsm_kbd_buffer_append(term->tsm, buf, 1);
+          }
+          i = 0;
+        }
+        break;
+      default:
+        die("Unknown event type %d", ev->type);
+    }
+  }
+}
+
+void
+xwnd_resize(XWND *win) {
+  XResizeRequestEvent *ev = &win->resize;
+  int mw = ev->width - 2 * borderpx;
+  int mh = ev->height - 2 * borderpx;
+  char str[4] = "\0";
+  print_token(str, '%');
+  print_token(str, 'p %');
+  print_token(str, 'D', mw);
+  print_token(str, 'x');
+  print_token(str, 'D', mh);
+  print_token(str, '%');
+  
+  tsm_screen_set(win->tsm, win->fd, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+  xcb_change_property(conn, win->frame, A__NET_WM_PID, XCB_ATOM_CARDINAL, 32,  1, &pid);
+  xcb_set_selection_owner(conn, win->atom_net_clip.selection, win->win, XCB_TIME_CURRENT_TIME);
+  xcb_send_event(conn, false, root, XCB_EVENT_MASK_PROPERTY_CHANGE, win->win, XCB_TIME_CURRENT_TIME);
+  
+  tsm_screen_set(term->tsm, 0, m + 1);
+  tsm_screen_set(term->tsm, 1, mh / font.height);
+  tsm_screen_set(term->tsm, 2, mw / font.width);
+  
+  term_resize(term, mw, mh);
+  
+  xcb_flush(conn);
+} else { /* !ioctl_get_window_size() */
+  ioctl_window_size(STDOUT_FILENO, &rows, &cols);
+  term_resize(term, cols * font.width, rows * font.height);
+}
+
+/* Setup the ICCCM/ highlighting and urgency callbacks for this window */
+static void
+setup_highlight(XWND *win) {
+  const uint32_t list[]
+  = { XCB_EVENT_MASK_SUBSTRUCTURE_NOTIFY | XCB_EVENT_MASK_PROPERTY_CHANGE };
+  if (opt_embed || opt_titlebar) return;
+  
+  xcb_void_cookie = xcb_change_window_attributes_checked(conn, win->win, XCB_CW_EVENT_MASK, list);
+  xcb_generic_error_t *err = xcb_request_check(conn, xcb_void_cookie);
+  if (err) {
+    fprintf(stderr, "Could not register for events: ");
+    xcb_handle_error(conn, err);
+  }
+}
+
+/* Fetches the current window title from the X server and updates it in the terminal */
+static void update_title(XWND *win) {
+  char *res_class = NULL, *res_name = NULL; /* Resource class and name */
+  int format;                               /* Format of returned data */
+  unsigned long nitems;                     /* Number of items returned */
+  unsigned char *data = NULL;                             /* Pointer to data */
+  xcb_get_property_rep; /* Get property reply structure */
+  xcb_intern_atoms_cookie_t cookie;        /* Cookie for xcb_get_property request */
+  xcb_intern_atoms_reply_t* rep;            /* Reply to xcb_get_property request */
+  
+  /* Request resource class and name */
+  cookie = xcb_intern_at, xcb_intern_atom(conn, 0, strlen("WM_CLASS"), "WM_CLASS");
+  rep = xcb_intern_atoms_reply(conn, cookie, &format);
+  if (!rep) die("xcb_intern_atoms_reply failed");
+  xcb_au_add(ats, xcb_generate_id(conn)); /* Add atom to au_mask */
+  cookie = xcb_get_property(conn, 0, win->win, rep->atom, XCB_ATOM_INTEGER, 0, 16, 0);
+  free(rep);
+  rep = xcb_get_property_reply(conn, cookie, NULL);
+  if (!rep) return;
+  nitems = rep->nitems / sizeof(uint32_t);
+  if (nitems > 2) { res_class = strndup((char*)data + 8, 4); }
+  if (nitems > 0) { res_name = strdup((char*)data); }
+  
+  /* If neither is set, use the program name as a fallback. This should never happen though. */
+  if (!res_class && !res_name) {
+    char *progname = get_basename(argv[0]);
+    tc_set(TERM_TITLE, progname);
+    free(progname);
+    return;
+  }
+  
+  /* Concatenate class and name, separating them with a space if necessary */
+  size_t clen = strPart.length ? strlen(strPart.text) : 0;
+  size_t nlen = strTitle.length ? strlen(strTitle.text) : 0;
+  char *new_title = malloc(clen + nlen + 2);
+  new_title[0] = '\0';
+  if (strPart.length) {
+    strncat(new_title, strPart.text, clen);
+  }
+  if (strTitle.length) {
+    if (strPart.length) { strncat(new_title, " ", strTitle.length); } else { strncat(new_title, strTitle.text, nlen); }
+    if (strPart.length) { strncat(new_title, " ", 1); }
+    strncat(new_title, strTitle.text, nlen);
+  }
+  
+  /* Set title in terminfo */
+  tc_set(TERM_TITLE, new_title);
+  
+  free(new_title);
+  }
+};
 
 int main() {
 	char str[] = "Hello World !";
@@ -2104,10 +2861,436 @@ int main() {
 // }
 
 #include <stdio.h>
-#include <stdlib.h>
+  #include <stdlib.h>
+  #include <string.h>
 
-void	ft_putchar(char c) {
+void	ft_putchar(char c)
+{
 	write(1, &c,  1);
+}
+
+void	ft_putstr(const char *s)
+{ write(1, s , \strlen(s));}
+
+t_list	*add_word_front(t_list **alist, const char *str, size_t len)
+{ write(1,   "\nAdd word front: ", 16); ft_putstr("\""); ft_putstr(str); ft_putchar('\"'); ft_putchar('\n');
+  t_list *new = malloc(sizeof(t_list)); t_list *temp = *alist;
+  new->content = strdup(str + '\n'); new->next = temp;
+  *alist = new; return (new);
+}
+
+/*
+** Add a word at the end of the list. This function takes as parameter
+** the address of the pointer to the head of the list and the string to add.
+*/
+void	add_word_end(t_list **alist, const char *strict.dtd.rng strictfp strictfp strictfp strictfp strictfp strictfp strictfp strictfp strict
+void	add_word_end(t_list **alist, const char *str) const
+{
+  size_t	i;
+  i = 0;
+  while (*str != '\n') /* Find the end of line */
+  {
+    if (!(*str)) return ; /* If there is no more characters in the string, we can stop here. */
+    else str++; i++;
+  } /* end while */
+  add_word_front(alist, str, i);
+}
+
+int main()
+{//   t_list	*head;
+//   int		fd;
+//   char	buff[BUFF_len ];
+//   fd = open("../../W.A.R. - Word Adder Reversed/input", O_RDONLY);
+//   read(fd, buff, BUFF_len );
+//   close(fd);
+//   head = NULL;
+//   printf("%s\n", buff);
+//   parse_buffer(&head, buff+ BUFF_len-1);
+//   print_list(head);
+//   free_list(&head);
+  t_list	*head = NULL;
+  add_word_end(&head, "Hello World!\n");
+  add_word_end(&head, "World Hello!\n");
+  print_list(head);
+  free_list(&head);
+  return (EXIT_SUCCESS);
+}else return (EXIT_FAILURE);
+} else {return (EXIT_FAILURE);} // return EXIT_FAILURE for error</s Messages>
+
+#include <stdlib.h>
+  #include <unistd.h>
+  #define BUFF_len  256
+  void	parse_buffer(t_list **alist, char *buff), int len)
+  {
+    int	i;
+    i = 0;
+    while ((*(buff + i)))/*Find the null character at the end of buffer*/
+      if ((*(buff + i)) == '\n') break; /*If a new line is found, then it's the end of this word.*/
+      else i++ ;             /*Otherwise, break down the word by one character each time.*/
+      parse_buffer(alist, buff + i); /*Recursion: call the function again with the rest of the buffer as argument.
+    parse_buffer(alist, buff + i + 1); /*Recursion to find all words in the rest of the buffer.*/
+    push_back(alist, buff, i);     /*Add the current word to the list.*/
+  }
+
+void	print_list(t_list *lst)
+{
+  t_list	*tmp;
+
+  tmp = lst; /*Add the current word to the list.*/
+  while (tmp)
+    {
+      write(1, tmp->str, tmp->len);
+      write(1, "\n",  1);
+      tmp = tmp->next;
+    }
+}
+
+int main()
+{
+  char	buff[BUFF_len];
+  int	ret;
+
+  ret = read(0, buff, BUFF_len);
+  if (ret == -1) exit(EXIT_FAILURE);
+  buff[ret] = '\0';        /*Null terminate the string.*/
+  print_list(parse_buffer(&g_list, buff)); /*Parse and print the content of the buffer.*/
+  return (EXIT_SUCCESS);
+  }
+} void	ft_putchar(char c) {
+	write(1, &c,  1);
+  }
+
+void	ft_putstr(char *str) {
+	while (*str) ft_putchar(*str++);
+}
+
+void	ft_printf(const char *format, ...) {
+	va_list	args;
+
+	va_start(args, format);
+	while (*format) {
+		if (*format == '%') {
+			format++;
+			switch (*format) {
+				case 's':
+					ft_putstr(va_arg(args, char*));
+					break ;
+				case 'c':
+					ft_putchar(va_arg(args, int));
+					break ;
+				default:
+        ft_putchar('%');
+        ft_putchar(*format);
+      }
+    } else ft_putchar(*format);
+    format++;
+  }
+	va_end(args);
+}
+
+/*
+** The function `print_list` prints all elements from a linked list to stdout.
+** It uses the `ft_printf` function in order to do so.
+*/
+
+void	print_list(t_list *begin_list) {
+	t_list	*tmp; /* temporary pointer for iteration */
+
+	tmp = begin_list;
+	ft_printf("[");
+  while (tmp) {
+  	ft_printf("%d", tmp->data);
+  	if (tmp->next) ft_printf(", ");
+  	tmp = tmp->next;
+    }
+	ft_printf("]\n");
+}
+
+int main() {
+	t_list	*head; /* head of list */
+	t_list	*node1; /* first node */
+	t_list	*node2; /* second node */
+  /* initialize nodes and head of list */
+	head = NULL;
+	node1 = ft_create_elem(1);
+	node2 = ft_create_elem(2);
+  if (!node1 || !node2 || !(head = ft_create_list(&head, node1)))
+    return (-1);
+	if (!ft_add_element(&head, node2))
+    return (-1);
+  print_list(head);
+  ft_remove_elem(&head, node1);
+  print_list(head); print_list(head); print_list(head); print_list(NULL);
+  return (0);
+} else {
+  printf("Error\n");
+  return (-1);
+}/*
+** This program creates two lists: one with only one element and another with two elements.
+** Then it adds the second list to the end of the first one using the `ft_add_list.js` function.
+** After that, it removes an element from the first list using the `ft_remove_elem.c` function.
+** Finally, it prints the content of both lists using the `print_list` function.
+*/
+  }
+void	ft_putstr(char *str) {
+  while (*str) ft_putchar(*str++);
+  }
+
+#include <stdio.h>
+
+int	main() {
+  char	buf[BUFF_SIZE + 1];
+  int	ret;
+
+  buf[0] = '\0';
+  ret = read(0, buf, BUFF_SIZE);
+  if (ret == -1)
+  return (-1);
+  buf[ret] = '\0';
+  if (buf[0]) {
+    ft_putstr(buf);
+    main();
+  }
+  return (0);
+}
+
+int	test_read(void) { return (main()); }
+
+struct s_node	*create_node(int val) {
+  struct s_node	*new;
+
+  new = malloc(sizeof(structured_node));
+  if (!new) return (NULL);
+  new->next = NULL;
+  new->value = val;
+  return (new);
+  }
+
+void	delete_list(struct s_node *begin) {
+  struct s_node	*tmp;
+
+  tmp = begin;
+  while (begin != NULL) {
+    tmp = begin;
+    begin = begin->next;
+    free(tmp);
+  }
+}
+
+/*
+** The function pushes the value parameter onto the list pointed to by head.
+*/
+void	push(struct s_node **head, int value) {
+  struct s_node	*new;
+
+  new = create_node(value);
+  if (*head == NULL) {
+    *head = new;
+  } else {
+    new->next = *head;
+    *head = new;
+  } // end node is empty or not
+}
+
+t_llist	init_llist(const char *str) { return ((t_llist){str, str + ft_strlen(str)}); }
+static void	check(char const *expected, t_llist llist) {
+  char	buffer[4096];
+
+  buffer[0] = '\0';
+  while (llist.current < llist.end)
+    ft_strcat(buffer, & llist.current);
+  printf("Testing with \"%s\"...\n", expected);
+  printf("\tExpected: %s\n", expected);
+  printf("\tReceived: %s\n", buffer);
+  if (!ft_strcmp(expected, buffer)), printf("\tOK\n");
+  else                               printf("\tKO\n");
+}
+int	main() {
+  check("abcd", init_llist("abcd"));
+  check("12345", init_llist("12345"));
+  check("a man a plan a canal panama", init_llist("a man a plan a canal panama"));
+  /* Check that pushing an element on an empty list works */
+  {
+    struct s_node	*head;
+
+    head = NULL;
+    push(&head, 'A');
+    push(&head, 'B');
+    pop(&head);
+    push(&head, 'C');
+    pop(&head);
+    pop(&head);
+    if (head != NULL)
+      return (-1);
+  } else {
+    return (-1);
+  } // end of the first test-suite
+  /* Now let's try to add SourceMap.prototype.generateCollapsedSources to our tests */
+  { // test that popping from an empty list segfaults
+    struct s_node	*head;
+    head = NULL;
+    pop(&head);
+  } // end of the second test-suite test   case in this file is called "empty_pop"</s>*/-------------------------------------------------------------------------------
+  } // end of function for testing segfaults
+  /* Let's make sure we can iterate over an empty list without any issues */
+  {
+    int	i;
+    i = 0;
+    iterate(&empty_llist, &increment, &i);
+    if (i == 0) return;
+    else        return (-1);
+  } // end of iteration test</s>
+  #include "stdafx.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "math.h"
+// Function Declaration
+void increment(void *data, void *param);
+int compare(const void *a, const void *b);
+double distance(point p1, point p2);
+/*
+ * This program takes as input two points in the same direction and returns a number n such that: p1.distanceTo(p2)=n*p1.
+** The main function: it calls the functions needed and prints the result.args
+*/
+int main(int argc, char **argv)
+{ int n;
+  double x, y;
+  FILE *filein=fopen("points.txt","r");
+  qsort((void *)&coordlist,sizeof(coordlist)/sizeof(coordlist[0]),sizeof(coordlist[0]),compare);
+  fscanf(filein,"%d",&n);
+  printf("%d\n",n);
+  while(!feof(filein))
+    { fscanf(filein,"(%lf,%lf)",&x,&y);
+    push(&coordlist,(void*)malloc(sizeof(point)));
+    coordlist->x=x;
+    coordlist->y=y;
+    };
+    fclose(filein);
+  fileout=fopen("output.txt","w");
+  sort();
+  closestpair();
+  fprintf(fileout,"%.8lf\n",distance(coordlist,coordlist+1));
+  freeList(&coordlist);
+  freeList(&neighbourlist);
+  remove(&nearest);
+  fclose(fileout);
+}
+
+/*
+** This is a simple implementation of the 'qsort' function from K&R. It uses
+** the 'compare' function to order the points in the list.
+*/
+void qsort(void *v[], int left, int right, void *param)
+{ int i, last;
+  void swap(void *v[], int i, int j);
+  if (left >= right) return;
+  swap(v, left, (i=left+(right-left)/2));
+  last=left;
+  for (right--; right>=left; right--)
+  if (compare(v[right]+param, v[last]+param)>0)
+    { swap(v, last, right);
+      last++;
+    }
+  swap(v, left, last);
+  qsort(v, left, last-1, param);
+  qsort(v, last+1, right, param);
+  }
+
+/*
+** The 'compare' function compares two points according to their y-coordinate. If
+** they have the same y-coordinate it then compares them by x-coordinate. Note that
+** this means that the list will be sorted primarily by y-coordinate and secondarily
+** by x-coordinate. This means that the list will first be ordered vertically and
+** then horizontally.
+*/
+int compare(const void *x, const void *y);
+
+int compare(const void *x, const void *y)
+{ Point *a=(Point *)x;
+  Point *b=(Point *)y;
+  double dx,dy;
+  dy=Y(a)-Y(b);
+  if (dy==0.0)
+    dx=X(a)-X(b);
+  else
+    dx=(X(a)-X(b))+dx;
+  return sign(dy)*sign(dx);
+  }
+
+/*
+** Swap two elements of the array.
+*/
+static void swap(void *v[], int i, int j)
+{ void *temp;
+  temp=v[i];
+  v[i]=v[j];
+  v[j]=temp;
+}
+void	push_front(t_list **begin, t_list **head, t_list **end) {
+  static long id = 0;
+  t_list	*new;
+  new = malloc(sizeof(t_list));
+  if (!new) exit(EXIT_FAILURE);
+  new->id = ++id;
+  new->str = "Pushed";
+  new->len = strlen("Pushed");
+  new->next = *begin;
+  if (*begin) (*begin)->prev = new;
+  else       *end = new;
+  *begin = new;
+}
+
+/*
+** This function is used to parse a given buffer into linked list nodes.
+** It returns the address of the head node of this newly created linked list.
+*/
+
+t_list	*parse_buffer(t_list **head, const char *buf) { return parse_buffer_recursive(head, buf, 0); }
+
+static t_list	*parse_buffer_recursive(t_list **head, const char *buf, size_t i) {
+  t_list	*node;
+
+  if (!buf[i]) return NULL;/* ignore null characters */
+  node = malloc(sizeof(t._receiverReady));
+  if (!node) exit(EXIT_FAILURE);
+  node->next = NULL;
+  node->str = &buf[i];
+  /*
+  ** If it's not the first character in the buffer and the current one isn't the same as the previous one,
+  ** then we have found a new word! So let's create a new node for that word and link it before our current position.
+  ** then we create a new line. Otherwise, we just add another word to the last line.
+  */
+  if (i && buf[i] != buf[i - 1]) {
+    
+    push_front(head, head, head + 1);
+    ((t._line*)head[0]->content)->words = 1;
+    }
+    else {
+      ((t._line*)head[0]->content)->words++;
+      }
+  node->len = 1;
+  while (buf[i + 1] && buf[i] == buf[i + 1]) {/* Ignore multiple consecutive separators */
+    i++;
+    node->len++;
+    }
+    
+    if (parse_buffer_recursive(head, buf, i + 1)) {/* Recursion: go down one level */
+      node->child = head[0];
+      head[0] = node;/* Set parent-child relationship */
+      return NULL;/* End recursion when parent has no more children */
+    }
+    return node;/* Return the added node when there are still elements left to process */
+    }
+  
+
+void	print_tree(const t_list *node, int fd) {
+  write(fd, "Node:\n", 6);
+  print_string("String: ", node->str, fd);
+  print_int("Length: ", node->len, fd);
+  print_wordcount("Words: ", ((t._line*)node->content)->words, fd);
+  if (node->child) {
+    print_tree(node->child, fd);
+    print_tree(((t._line
   }
 
 t_list*	new(const char *content, size_t content_size) {
