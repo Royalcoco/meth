@@ -1,0 +1,28 @@
+import React, { useState } from 'react';
+import QRCode from 'qrcode.react';
+
+function App() {
+  const [message, setMessage] = useState('');
+  const [qrValue, setQrValue] = useState('');
+
+  const generateQR = () => {
+    // Assurez-vous que le message est chiffré avant de générer le QR code
+    setQrValue(message);
+  };
+
+  return (
+    <div>
+      <h1>Secure Message Platform</h1>
+      <input
+        type="text"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        placeholder="Enter your message"
+      />
+      <button onClick={generateQR}>Generate QR Code</button>
+      {qrValue && <QRCode value={qrValue} />}
+    </div>
+  );
+}
+
+export default App;
